@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "cover": {
+      "type": "string"
+    },
+    "screenshots": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "platforms": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "yandex",
+          "android",
+          "web"
+        ]
+      }
+    },
+    "genre": {
+      "type": "string"
+    },
+    "playUrl": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "uri"
+        },
+        {
+          "type": "string",
+          "const": ""
+        }
+      ]
+    },
+    "embedUrl": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "uri"
+        },
+        {
+          "type": "string",
+          "const": ""
+        }
+      ]
+    },
+    "date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "featured": {
+      "default": false,
+      "type": "boolean"
+    },
+    "$schema": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "title",
+    "description",
+    "cover",
+    "platforms",
+    "genre",
+    "date"
+  ]
+}

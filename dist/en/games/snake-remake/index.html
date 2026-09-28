@@ -1,0 +1,20 @@
+<!DOCTYPE html><html lang="en" class="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Snake Remake · PerkGames</title><meta name="description" content="Classic snake with new mechanics and levels."><script>
+    const saved = localStorage.getItem('theme');
+    const theme = saved || 'dark';
+    document.documentElement.classList.toggle('light', theme === 'light');
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+  </script><link rel="stylesheet" href="/_astro/Base.C1y3mPem.css"></head><body><header style="border-bottom:1px solid var(--border)"><nav class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between"><a href="/en/" class="font-bold text-lg">PerkGames</a><div class="flex items-center gap-5 text-sm muted"><a href="/en/" class="hover:opacity-80">Games</a><a href="/en/about" class="hover:opacity-80">About</a><a href="/games/snake-remake/" class="px-2 py-0.5 rounded border" style="border-color:var(--border)">RU</a><button id="theme-toggle" class="px-2 py-0.5 rounded border" style="border-color:var(--border)" aria-label="theme">◐</button></div></nav></header><main class="max-w-5xl mx-auto px-6 py-10"><a href="/en/" class="text-sm muted hover:opacity-80">← All games</a><h1 class="text-3xl font-bold mt-4">Snake Remake</h1><div class="flex gap-2 mt-3 flex-wrap"><span class="text-xs px-2 py-0.5 rounded-full bg-red-500/15 text-red-400">Yandex Games</span><span class="text-xs px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-400">Web</span><span class="text-xs px-2 py-0.5 rounded-full" style="background:var(--card);color:var(--muted)">arcade</span></div><img src="/covers/snake.png" alt="Snake Remake" class="mt-6 w-full rounded-xl" style="border:1px solid var(--border)"><article class="mt-8 max-w-none leading-relaxed"><p>Classic snake with teleports, boosters and bonuses.</p>
+<h2 id="controls">Controls</h2>
+<ul>
+<li>Arrows / WASD</li>
+<li>Swipe on mobile</li>
+</ul>
+</article><div class="mt-10"><h2 class="text-xl font-semibold mb-4">Screenshots</h2><div class="grid sm:grid-cols-2 gap-4"><img src="/screenshots/snake-1.png" class="rounded-lg" style="border:1px solid var(--border)"></div></div></main><footer style="border-top:1px solid var(--border)" class="mt-20"><div class="max-w-5xl mx-auto px-6 py-6 text-sm muted">© 2026 PerkGames. All rights reserved.</div></footer><script>
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+      const html = document.documentElement;
+      const next = html.classList.contains('light') ? 'dark' : 'light';
+      html.classList.toggle('light', next === 'light');
+      html.classList.toggle('dark', next === 'dark');
+      localStorage.setItem('theme', next);
+    });
+  </script></body></html>

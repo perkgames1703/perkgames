@@ -1,0 +1,14 @@
+<!DOCTYPE html><html lang="en" class="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>About · PerkGames</title><meta name="description" content><script>
+    const saved = localStorage.getItem('theme');
+    const theme = saved || 'dark';
+    document.documentElement.classList.toggle('light', theme === 'light');
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+  </script><link rel="stylesheet" href="/_astro/Base.C1y3mPem.css"></head><body><header style="border-bottom:1px solid var(--border)"><nav class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between"><a href="/en/" class="font-bold text-lg">PerkGames</a><div class="flex items-center gap-5 text-sm muted"><a href="/en/" class="hover:opacity-80">Games</a><a href="/en/about" class="hover:opacity-80">About</a><a href="/about/" class="px-2 py-0.5 rounded border" style="border-color:var(--border)">RU</a><button id="theme-toggle" class="px-2 py-0.5 rounded border" style="border-color:var(--border)" aria-label="theme">◐</button></div></nav></header><main class="max-w-5xl mx-auto px-6 py-10"><h1 class="text-3xl font-bold mb-4">About</h1><p class="leading-relaxed" style="color:var(--fg);opacity:.9">Hi! I make small games and apps. This is my portfolio — play on Yandex Games, download on Google Play, or run right in the browser.</p><p class="muted mt-4">Contact: <a href="mailto:you@example.com" style="color:var(--color-accent)">you@example.com</a></p></main><footer style="border-top:1px solid var(--border)" class="mt-20"><div class="max-w-5xl mx-auto px-6 py-6 text-sm muted">© 2026 PerkGames. All rights reserved.</div></footer><script>
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+      const html = document.documentElement;
+      const next = html.classList.contains('light') ? 'dark' : 'light';
+      html.classList.toggle('light', next === 'light');
+      html.classList.toggle('dark', next === 'dark');
+      localStorage.setItem('theme', next);
+    });
+  </script></body></html>

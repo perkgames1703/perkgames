@@ -1,0 +1,14 @@
+<!DOCTYPE html><html lang="en" class="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>My games · PerkGames</title><meta name="description" content="Small projects for Yandex Games, Android and Web."><script>
+    const saved = localStorage.getItem('theme');
+    const theme = saved || 'dark';
+    document.documentElement.classList.toggle('light', theme === 'light');
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+  </script><link rel="stylesheet" href="/_astro/Base.C1y3mPem.css"></head><body><header style="border-bottom:1px solid var(--border)"><nav class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between"><a href="/en/" class="font-bold text-lg">PerkGames</a><div class="flex items-center gap-5 text-sm muted"><a href="/en/" class="hover:opacity-80">Games</a><a href="/en/about" class="hover:opacity-80">About</a><a href="/" class="px-2 py-0.5 rounded border" style="border-color:var(--border)">RU</a><button id="theme-toggle" class="px-2 py-0.5 rounded border" style="border-color:var(--border)" aria-label="theme">◐</button></div></nav></header><main class="max-w-5xl mx-auto px-6 py-10"><h1 class="text-3xl font-bold mb-2">My games</h1><p class="muted mb-8">Small projects for Yandex Games, Android and Web.</p><div class="grid sm:grid-cols-2 md:grid-cols-3 gap-5"><a href="/en/games/snake-remake" class="card block"><img src="/covers/snake.png" alt="Snake Remake" class="w-full aspect-video object-cover"><div class="p-4"><h3 class="font-semibold">Snake Remake</h3><p class="text-sm muted mt-1 line-clamp-2">Classic snake with new mechanics and levels.</p><div class="flex gap-2 mt-3 flex-wrap"><span class="text-xs px-2 py-0.5 rounded-full bg-red-500/15 text-red-400">Yandex Games</span><span class="text-xs px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-400">Web</span></div></div></a></div></main><footer style="border-top:1px solid var(--border)" class="mt-20"><div class="max-w-5xl mx-auto px-6 py-6 text-sm muted">© 2026 PerkGames. All rights reserved.</div></footer><script>
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+      const html = document.documentElement;
+      const next = html.classList.contains('light') ? 'dark' : 'light';
+      html.classList.toggle('light', next === 'light');
+      html.classList.toggle('dark', next === 'dark');
+      localStorage.setItem('theme', next);
+    });
+  </script></body></html>
