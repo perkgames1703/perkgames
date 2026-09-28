@@ -1,0 +1,64 @@
+---
+import '../styles/global.css';
+import { t, siteName, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description?: string;
+}
+const { lang, title, description = '' } = Astro.props;
+const tr = t[lang];
+const other: Lang = lang === 'ru' ? 'en' : 'ru';
+const prefix = lang === 'ru' ? '' : '/en';
+const otherPrefix = other === 'ru' ? '' : '/en';
+const path = Astro.url.pathname.replace(/^\/en/, '') || '/';
+---
+<!doctype html>
+<html lang={lang} class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title} · {siteName}</title>
+  <meta name="description" content={description} />
+  <script is:inline>
+    const saved = localStorage.getItem('theme');
+    const theme = saved || 'dark';
+    document.documentElement.classList.toggle('light', theme === 'light');
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+  </script>
+</head>
+<body>
+  <header style="border-bottom:1px solid var(--border)">
+    <nav class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href={`${prefix}/`} class="font-bold text-lg">{siteName}</a>
+      <div class="flex items-center gap-5 text-sm muted">
+        <a href={`${prefix}/`} class="hover:opacity-80">{tr.games}</a>
+        <a href={`${prefix}/about`} class="hover:opacity-80">{tr.about}</a>
+        <a href={`${otherPrefix}${path}`} class="px-2 py-0.5 rounded border" style="border-color:var(--border)">{other.toUpperCase()}</a>
+        <button id="theme-toggle" class="px-2 py-0.5 rounded border" style="border-color:var(--border)" aria-label="theme">◐</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-6 py-10">
+    <slot />
+  </main>
+
+  <footer style="border-top:1px solid var(--border)" class="mt-20">
+    <div class="max-w-5xl mx-auto px-6 py-6 text-sm muted">
+      © {new Date().getFullYear()} {siteName}. {tr.footer}
+    </div>
+  </footer>
+
+  <script is:inline>
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+      const html = document.documentElement;
+      const next = html.classList.contains('light') ? 'dark' : 'light';
+      html.classList.toggle('light', next === 'light');
+      html.classList.toggle('dark', next === 'dark');
+      localStorage.setItem('theme', next);
+    });
+  </script>
+</body>
+</html>

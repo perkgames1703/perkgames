@@ -1,0 +1,28 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import GameCard from './GameCard.astro';
+import { t, type Lang } from '../i18n';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const tr = t[lang];
+
+const all = await getCollection('games');
+const games = all
+  .filter(g => g.id.startsWith(`${lang}/`))
+  .map(g => ({ game: g, slug: g.id.replace(`${lang}/`, '') }))
+  .sort((a, b) => b.game.data.date.valueOf() - a.game.data.date.valueOf());
+---
+<Base lang={lang} title={tr.myGames} description={tr.tagline}>
+  <h1 class="text-3xl font-bold mb-2">{tr.myGames}</h1>
+  <p class="muted mb-8">{tr.tagline}</p>
+
+  {games.length === 0 ? (
+    <p class="muted">{tr.empty}</p>
+  ) : (
+    <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
+      {games.map(({ game, slug }) => <GameCard game={game} lang={lang} slug={slug} />)}
+    </div>
+  )}
+</Base>

@@ -1,0 +1,17 @@
+---
+import PlatformBadge from './PlatformBadge.astro';
+import type { Lang } from '../i18n';
+interface Props { game: any; lang: Lang; slug: string; }
+const { game, lang, slug } = Astro.props;
+const prefix = lang === 'ru' ? '' : '/en';
+---
+<a href={`${prefix}/games/${slug}`} class="card block">
+  <img src={game.data.cover} alt={game.data.title} class="w-full aspect-video object-cover" />
+  <div class="p-4">
+    <h3 class="font-semibold">{game.data.title}</h3>
+    <p class="text-sm muted mt-1 line-clamp-2">{game.data.description}</p>
+    <div class="flex gap-2 mt-3 flex-wrap">
+      {game.data.platforms.map((p: any) => <PlatformBadge platform={p} lang={lang} />)}
+    </div>
+  </div>
+</a>

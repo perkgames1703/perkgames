@@ -1,0 +1,16 @@
+---
+import { getCollection } from 'astro:content';
+import GamePage from '../../components/GamePage.astro';
+
+export async function getStaticPaths() {
+  const games = await getCollection('games');
+  return games
+    .filter(g => g.id.startsWith('ru/'))
+    .map(g => ({
+      params: { slug: g.id.replace('ru/', '') },
+      props: { game: g, slug: g.id.replace('ru/', '') },
+    }));
+}
+const { game, slug } = Astro.props;
+---
+<GamePage lang="ru" game={game} slug={slug} />

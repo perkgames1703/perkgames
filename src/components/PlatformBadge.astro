@@ -1,0 +1,15 @@
+---
+import type { Lang } from '../i18n';
+interface Props { platform: 'yandex' | 'android' | 'web'; lang: Lang; }
+const { platform, lang } = Astro.props;
+const labels = {
+  ru: { yandex: 'Яндекс.Игры', android: 'Android', web: 'Web' },
+  en: { yandex: 'Yandex Games', android: 'Android', web: 'Web' },
+}[lang];
+const colors = {
+  yandex: 'bg-red-500/15 text-red-400',
+  android: 'bg-green-500/15 text-green-400',
+  web: 'bg-blue-500/15 text-blue-400',
+};
+---
+<span class={`text-xs px-2 py-0.5 rounded-full ${colors[platform]}`}>{labels[platform]}</span>

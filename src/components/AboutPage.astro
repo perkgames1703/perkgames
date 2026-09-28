@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import { t, type Lang } from '../i18n';
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const tr = t[lang];
+---
+<Base lang={lang} title={tr.aboutTitle}>
+  <h1 class="text-3xl font-bold mb-4">{tr.aboutTitle}</h1>
+  <p class="leading-relaxed" style="color:var(--fg);opacity:.9">{tr.aboutText}</p>
+  <p class="muted mt-4">
+    {tr.contact}: <a href="mailto:you@example.com" style="color:var(--color-accent)">you@example.com</a>
+  </p>
+</Base>

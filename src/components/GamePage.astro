@@ -1,0 +1,53 @@
+---
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PlatformBadge from './PlatformBadge.astro';
+import { t, type Lang } from '../i18n';
+
+interface Props { lang: Lang; game: any; slug: string; }
+const { lang, game, slug } = Astro.props;
+const tr = t[lang];
+const { Content } = await render(game);
+---
+<Base lang={lang} title={game.data.title} description={game.data.description}>
+  <a href={lang === 'ru' ? '/' : '/en/'} class="text-sm muted hover:opacity-80">{tr.allGames}</a>
+
+  <h1 class="text-3xl font-bold mt-4">{game.data.title}</h1>
+  <div class="flex gap-2 mt-3 flex-wrap">
+    {game.data.platforms.map((p: any) => <PlatformBadge platform={p} lang={lang} />)}
+    <span class="text-xs px-2 py-0.5 rounded-full" style="background:var(--card);color:var(--muted)">{game.data.genre}</span>
+  </div>
+
+  {game.data.embedUrl ? (
+    <div class="mt-6 aspect-video rounded-xl overflow-hidden" style="border:1px solid var(--border)">
+      <iframe src={game.data.embedUrl} class="w-full h-full" allowfullscreen></iframe>
+    </div>
+  ) : (
+    <img src={game.data.cover} alt={game.data.title} class="mt-6 w-full rounded-xl" style="border:1px solid var(--border)" />
+  )}
+
+  {game.data.playUrl && (
+    <div class="mt-6">
+      <a href={game.data.playUrl} target="_blank" rel="noopener"
+         class="inline-block px-5 py-2.5 rounded-lg font-medium text-white"
+         style="background:var(--color-accent)">
+        {tr.play}
+      </a>
+    </div>
+  )}
+
+  <article class="mt-8 max-w-none leading-relaxed">
+    <Content />
+  </article>
+
+  {game.data.screenshots.length > 0 && (
+    <div class="mt-10">
+      <h2 class="text-xl font-semibold mb-4">{tr.screenshots}</h2>
+      <div class="grid sm:grid-cols-2 gap-4">
+        {game.data.screenshots.map((src: string) => (
+          <img src={src} class="rounded-lg" style="border:1px solid var(--border)" />
+        ))}
+      </div>
+    </div>
+  )}
+</Base>
