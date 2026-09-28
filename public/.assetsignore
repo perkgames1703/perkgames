@@ -1,0 +1,4 @@
+# Files ignored when deploying static assets
+_worker.js
+_redirects
+_headers
